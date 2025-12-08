@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife VN - Nền tảng Fitness & Sức khỏe</title>
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="../code_css/nguoi_dung.css">
+    
+    <script src="../code_js/nguoi_dung.js" defer></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+<div class="flex h-screen overflow-hidden">
+
+    
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-logo">
+            <a href="#trang-chu" class="logo-link" onclick="hienThiTrang('trang-chu')">
+                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <span class="logo-text">Fit<span class="logo-text-green">Life</span></span>
+            </a>
+        </div>
+
+        <div class="sidebar-menu">
+            <nav class="menu-nav">
+                <a href="#video" class="menu-link" onclick="hienThiTrang('video')">
+                    <i class="fa-solid fa-video menu-icon"></i>
+                    <span class="menu-text">Video</span>
+                </a>
+
+                <a href="#lo-trinh" class="menu-link" onclick="hienThiTrang('lo-trinh')">
+                    <i class="fa-solid fa-map-location-dot menu-icon"></i>
+                    <span class="menu-text">Lộ trình cá nhân</span>
+                </a>
+
+                <a href="#thong-bao" class="menu-link" onclick="hienThiTrang('thong-bao')">
+                    <i class="fa-solid fa-bell menu-icon"></i>
+                    <span class="menu-text">Thông báo</span>
+                    <span class="notification-badge">3</span>
+                </a>
+
+                <a href="#gop-y" class="menu-link" onclick="hienThiTrang('gop-y')">
+                    <i class="fa-solid fa-comment-dots menu-icon"></i>
+                    <span class="menu-text">Góp ý</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <a href="#ho-so" class="menu-link" onclick="hienThiTrang('ho-so')">
+                    <i class="fa-solid fa-id-card menu-icon"></i>
+                    <span class="menu-text">Hồ sơ cá nhân</span>
+                </a>
+            </nav>
+        </div>
+
+        
+        <div class="sidebar-user">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=random&color=fff" class="user-avatar" alt="Ảnh đại diện">
+                <div class="user-details">
+                    <p class="user-name">Nguyễn Văn A</p>
+                </div>
+                <a href="dn.html" class="logout-link" title="Đăng xuất" onclick="dangXuat()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="main-content">
+        
+        <header class="mobile-header">
+            <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <span id="mobile-title" class="mobile-title">Video</span>
+            <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=random&color=fff" class="mobile-avatar" alt="Ảnh đại diện">
+        </header>
+
+        <main class="main-area">
+            
+            <div id="trang-chu" class="page-content hidden">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Chào mừng đến với FitLife VN</h1>
+                        <p class="hero-subtitle">Nền tảng fitness & sức khỏe toàn diện dành cho người Việt</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" onclick="hienThiTrang('video')">
+                                <i class="fa-solid fa-play"></i> Bắt đầu ngay
+                            </button>
+                            <button class="btn-secondary" onclick="hienThiTrang('lo-trinh')">
+                                <i class="fa-solid fa-route"></i> Xem lộ trình
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Fitness">
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h2 class="section-title">Tính năng nổi bật</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-dumbbell"></i>
+                            </div>
+                            <h3 class="feature-title">Bài tập đa dạng</h3>
+                            <p class="feature-desc">Hàng trăm bài tập từ cơ bản đến nâng cao phù hợp với mọi trình độ</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <h3 class="feature-title">Dinh dưỡng khoa học</h3>
+                            <p class="feature-desc">Kế hoạch ăn uống cân bằng được thiết kế bởi chuyên gia dinh dưỡng</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="feature-title">Theo dõi tiến độ</h3>
+                            <p class="feature-desc">Ghi lại và theo dõi sự tiến bộ của bạn trong suốt hành trình</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="video" class="page-content">
+                <div class="video-header">
+                    <h2 class="section-title">Thư viện Video</h2>
+                    <button id="add-video-btn" class="add-video-btn hidden" onclick="toggleModal('video-modal')">
+                        <i class="fa-solid fa-plus"></i> Thêm Video
+                    </button>
+                </div>
+
+                <div class="video-filters">
+                    <button onclick="filterVideos('all', this)" class="filter-btn active">Tất cả</button>
+                    <button onclick="filterVideos('gym', this)" class="filter-btn">Bài tập Gym</button>
+                    <button onclick="filterVideos('yoga', this)" class="filter-btn">Yoga & Thiền</button>
+                    <button onclick="filterVideos('nutrition', this)" class="filter-btn">Dinh dưỡng</button>
+                </div>
+
+                <div class="video-grid">
+                   
+                    <div class="video-card" data-category="gym">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">25:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Cardio giảm mỡ toàn thân tại nhà không cần dụng cụ</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-fire text-orange-500"></i> 300 Kcal</span>
+                                <span>Gym • HLV: Nguyễn Tuấn</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card" data-category="yoga">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">45:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Yoga buổi sáng giúp đánh thức cơ thể và tinh thần</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-fire text-orange-500"></i> 150 Kcal</span>
+                                <span>Yoga • HLV: Mai Anh</span>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="video-card" data-category="nutrition">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">10:45</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Hướng dẫn chuẩn bị bữa trưa Eat Clean trong 15 phút</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-utensils text-blue-500"></i> Dinh dưỡng</span>
+                                <span>Chuyên gia: Dr. Linh</span>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="video-card" data-category="gym">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">35:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Tập ngực và tay sau hiệu quả tại phòng Gym</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-fire text-orange-500"></i> 250 Kcal</span>
+                                <span>Gym • HLV: Đức Thịnh</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card" data-category="yoga">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">20:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Bài tập giãn cơ (Stretching) sau khi chạy bộ</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-fire text-orange-500"></i> 100 Kcal</span>
+                                <span>Yoga • HLV: Thu Hà</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card" data-category="nutrition">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="thumbnail-img">
+                            <div class="play-overlay">
+                                <div class="play-button">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                            </div>
+                            <span class="video-duration">08:20</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">5 Loại sinh tố Detox giúp đẹp da giữ dáng</h3>
+                            <div class="video-meta">
+                                <span><i class="fa-solid fa-utensils text-blue-500"></i> Dinh dưỡng</span>
+                                <span>Chuyên gia: Dr. Linh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LỘ TRÌNH CÁ NHÂN  -->
+            <div id="lo-trinh" class="page-content hidden">
+                <div class="lo-trinh-header">
+                    <h2 class="section-title">Lộ trình cá nhân</h2>
+                    <button onclick="luuLichTrinh()" class="btn-save">Lưu thay đổi</button>
+                </div>
+
+                <div class="lo-trinh-grid">
+                    <div class="lich-tuan-container">
+                        <div class="lich-tuan-header">
+                            <h3> Lộ trình tuần này</h3>
+                        </div>
+                        <div class="lich-tuan">
+                           
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 2</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay ngay-hien-tai">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 3</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" value="HIIT Cardio" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" value="30 phút • Tại nhà" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 4</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 5</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 6</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name">Thứ 7</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                            <div class="lich-ngay">
+                                <div class="ngay-header">
+                                    <span class="ngay-name chu-nhat">CN</span>
+                                </div>
+                                <div class="ngay-content">
+                                    <input type="text" value="Nghỉ ngơi" placeholder="Nhập bài tập chính" class="bai-tap-input">
+                                    <input type="text" placeholder="Ghi chú chi tiết" class="ghi-chu-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="muc-tieu-container">
+                        <div class="muc-tieu-box">
+                            <h3><i class="fa-solid fa-bullseye"></i> Mục tiêu tuần</h3>
+                            <div class="form-group">
+                                <label class="form-label">Mục tiêu cân nặng</label>
+                                <input type="text" placeholder="VD: Giảm 0.5 kg" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Số buổi tập</label>
+                                <input type="text" placeholder="VD: Tập 4 buổi" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Khác</label>
+                                <input type="text" placeholder="VD: Chạy 10km" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="dinh-duong-box">
+                            <h3><i class="fa-solid fa-apple-whole"></i> Dinh dưỡng</h3>
+                            <div class="form-group">
+                                <label class="form-label">Ghi chú thực đơn & Macro</label>
+                                <textarea class="form-textarea" placeholder="VD:&#10;- Protein: 120g&#10;- Calo: 1800&#10;- Uống 2.5L nước&#10;- Hạn chế đường"></textarea>
+                            </div>
+                        </div>
+                        <button onclick="luuTatCa()" class="btn-save-all">Lưu tất cả</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THÔNG BÁO  -->
+            <div id="thong-bao" class="page-content hidden">
+                <div class="notification-container">
+                    <div class="notification-header">
+                        <h2 class="section-title">Thông báo của bạn</h2>
+                        <p class="notification-subtitle">Cập nhật tin tức mới nhất từ FitLife VN.</p>
+                    </div>
+
+                    <div class="notification-list">
+                        <div class="notification-item info">
+                            <div class="notification-icon info-icon">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-meta">
+                                    <h4 class="notification-title">Bảo trì hệ thống</h4>
+                                    <span class="notification-time">2 giờ trước</span>
+                                </div>
+                                <p class="notification-text">Hệ thống sẽ bảo trì nâng cấp vào lúc 00:00 - 02:00 ngày mai. Vui lòng lưu ý.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item success">
+                            <div class="notification-icon success-icon">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-meta">
+                                    <h4 class="notification-title">Video mới: Yoga thư giãn</h4>
+                                    <span class="notification-time">1 ngày trước</span>
+                                </div>
+                                <p class="notification-text">Bài tập Yoga mới giúp giảm căng thẳng đã được thêm vào thư viện.</p>
+                                <a href="#video" onclick="hienThiTrang('video')" class="notification-link">Xem ngay</a>
+                            </div>
+                        </div>
+
+                        <div class="notification-item warning">
+                            <div class="notification-icon warning-icon">
+                                <i class="fa-solid fa-reply"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-meta">
+                                    <h4 class="notification-title">Phản hồi góp ý</h4>
+                                    <span class="notification-time">3 ngày trước</span>
+                                </div>
+                                <p class="notification-text">Admin đã trả lời góp ý của bạn về lỗi video. Cảm ơn bạn đã phản hồi!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-footer">
+                        <button class="view-all-btn">Xem tất cả thông báo cũ</button>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- GÓP Ý -->
+            <div id="gop-y" class="page-content hidden">
+                <div class="gop-y-container">
+                    <div class="gop-y-header">
+                        <h2 class="section-title">Gửi góp ý của bạn</h2>
+                        <p class="gop-y-subtitle">Chúng tôi luôn lắng nghe để cải thiện chất lượng dịch vụ tốt hơn mỗi ngày.</p>
+                    </div>
+
+                    
+                    <div class="gop-y-form-container" id="form-container">
+                        <form id="gop-y-form" class="gop-y-form">
+                            <div class="form-group">
+                                <label class="form-label">Chủ đề góp ý</label>
+                                <select class="form-select">
+                                    <option>Về bài tập / Huấn luyện viên</option>
+                                    <option>Về chế độ dinh dưỡng</option>
+                                    <option>Lỗi kỹ thuật / Ứng dụng</option>
+                                    <option>Đề xuất tính năng mới</option>
+                                    <option>Khác</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Tiêu đề</label>
+                                <input type="text" placeholder="Tóm tắt ngắn gọn vấn đề..." class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nội dung chi tiết</label>
+                                <textarea rows="5" placeholder="Chia sẻ chi tiết ý kiến của bạn..." class="form-textarea" required></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fa-solid fa-paper-plane"></i> Gửi ngay
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HỒ SƠ  -->
+            <div id="ho-so" class="page-content hidden">
+                <div class="ho-so-container">
+                    <div class="ho-so-header">
+                        <div class="avatar-section">
+                            <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=4ADE80&color=fff&size=128" class="avatar-large" alt="Ảnh đại diện lớn">
+                            <button class="avatar-edit-btn" id="avatar-edit-btn">
+                                <i class="fa-solid fa-camera"></i>
+                            </button>
+                        </div>
+                        <h2 class="user-name-large">Nguyễn Văn A</h2>
+                        <p class="join-date">Thành viên từ 20/10/2023</p>
+                    </div>
+
+                   
+                    <form id="ho-so-form" class="ho-so-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên</label>
+                                <input type="text" value="Nguyễn Văn A" id="ho-va-ten" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" value="nguyenvana@email.com" disabled class="form-input disabled">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chiều cao (cm)</label>
+                                <input type="number" value="175" id="chieu-cao" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cân nặng (kg)</label>
+                                <input type="number" value="70" id="can-nang" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="muc-tieu-section">
+                            <label class="form-label">Mục tiêu hiện tại</label>
+                            <div class="muc-tieu-options">
+                                <label class="muc-tieu-option selected">
+                                    <input type="radio" name="muc-tieu" checked class="radio-input">
+                                    <span class="muc-tieu-text">Giảm cân</span>
+                                </label>
+                                <label class="muc-tieu-option">
+                                    <input type="radio" name="muc-tieu" class="radio-input">
+                                    <span class="muc-tieu-text">Tăng cơ</span>
+                                </label>
+                                <label class="muc-tieu-option">
+                                    <input type="radio" name="muc-tieu" class="radio-input">
+                                    <span class="muc-tieu-text">Duy trì</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-submit">Lưu thay đổi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- MODAL THÊM VIDEO -->
+<div id="video-modal" class="modal hidden-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-video"></i> Thêm Video Mới</h3>
+            <button onclick="toggleModal('video-modal')" class="modal-close">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            
+            <form id="add-video-form" class="video-form">
+                <div class="form-group">
+                    <label class="form-label">Tiêu đề Video</label>
+                    <input type="text" placeholder="Nhập tiêu đề video..." class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Link Video (YouTube/Embed)</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fa-brands fa-youtube"></i>
+                        </span>
+                        <input type="text" placeholder="https://youtube.com/..." class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">URL Ảnh Thumbnail</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fa-solid fa-image"></i>
+                        </span>
+                        <input type="text" placeholder="https://example.com/image.jpg" class="form-input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Danh mục</label>
+                        <select class="form-select">
+                            <option value="gym">Bài tập Gym</option>
+                            <option value="yoga">Yoga & Thiền</option>
+                            <option value="nutrition">Dinh dưỡng</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Huấn luyện viên</label>
+                        <input type="text" placeholder="Tên HLV" class="form-input">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="toggleModal('video-modal')" class="btn-cancel">Hủy</button>
+                    <button type="submit" class="btn-submit">Lưu Video</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

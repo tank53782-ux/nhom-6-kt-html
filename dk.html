@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - FitLife VN</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="../code_css/dk.css">
+    
+    <script src="../code_js/dk.js"></script>
+</head>
+<body>
+    <nav id="thanh-dieu-huong" class="thanh-dieu-huong">
+        <div class="noi-dung-toan-trang">
+            <div class="khung-logo">
+                <a href="index.html" class="logo-fitlife">
+                    <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                    <span class="logo-text">Fit<span class="logo-text-green">Life</span>VN</span>
+                </a>
+                <div class="cac-nut-dieu-huong">
+                    <a href="index.html" class="nut-trang-chu">Trang chủ</a>
+                    <div class="khung-nut-dang-nhap">
+                        <a href="dn.html" class="nut-dang-nhap">Đăng nhập</a>
+                        <a href="dk.html" class="nut-dang-ky">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <main id="noi-dung-chinh" class="noi-dung-chinh">
+        <div class="anh-nen">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Gym Background" class="anh-nen-img">
+            <div class="lop-nen-mo"></div>
+        </div>
+
+        <div id="khung-dang-ky" class="khung-dang-ky">
+            <div class="tieu-de-dang-ky">
+                <div class="icon-nguoi-dung">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h2 class="tieu-de-chinh">Tạo tài khoản mới</h2>
+                <p class="tieu-de-phu">Gia nhập cộng đồng FitLifeVN</p>
+            </div>
+
+            <div class="noi-dung-form">
+                <form id="form-dang-ky" class="form-dang-ky">
+                    
+                    <div class="nhom-input">
+                        <label for="email-dang-ky" class="nhan-input">Email</label>
+                        <div class="khung-input-icon">
+                            <i class="fa-solid fa-envelope icon-input"></i>
+                            <input type="email" id="email-dang-ky" placeholder="example@email.com" required class="input-truong">
+                        </div>
+                    </div>
+
+                    
+                    <div class="nhom-input">
+                        <label for="mat-khau-dang-ky" class="nhan-input">Mật khẩu</label>
+                        <div class="khung-input-icon">
+                            <i class="fa-solid fa-lock icon-input"></i>
+                            <input type="password" id="mat-khau-dang-ky" placeholder="••••••••" required class="input-truong">
+                        </div>
+                    </div>
+
+                    
+                    <div class="nhom-input">
+                        <label for="nhap-lai-mat-khau" class="nhan-input">Nhập lại mật khẩu</label>
+                        <div class="khung-input-icon">
+                            <i class="fa-solid fa-lock icon-input"></i>
+                            <input type="password" id="nhap-lai-mat-khau" placeholder="••••••••" required class="input-truong">
+                        </div>
+                    </div>
+
+                   
+                    <div class="nhom-checkbox">
+                        <input type="checkbox" id="dieu-khoan" required class="checkbox-dieu-khoan">
+                        <label for="dieu-khoan" class="nhan-checkbox">Tôi đồng ý với <a href="dksd.html" class="link-dieu-khoan">Điều khoản sử dụng</a>.</label>
+                    </div>
+
+                   
+                    <button type="submit" class="nut-gui-form">
+                        Đăng ký ngay
+                    </button>
+                </form>
+
+                <div class="khung-chuyen-trang">
+                    <p class="text-chuyen-trang">Đã có tài khoản? <a href="dn.html" class="link-dang-nhap">Đăng nhập</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="chan-trang" class="chan-trang">
+        <div class="noi-dung-toan-trang">
+            <div class="logo-chan-trang">
+                <i class="fa-solid fa-heart-pulse logo-icon-chan-trang"></i>
+                <span class="logo-text-chan-trang">FitLifeVN</span>
+            </div>
+            <p class="text-ban-quyen">&copy; 2023 FitLife Vietnam. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+

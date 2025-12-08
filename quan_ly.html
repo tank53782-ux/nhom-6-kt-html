@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard - FitLife VN</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#4ADE80',
+                            dark: '#1F2937',
+                            orange: '#F97316'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Hiệu ứng chuyển tab */
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Modal Animation */
+        .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
+        .modal.visible-modal { opacity: 1; visibility: visible; pointer-events: auto; }
+
+        /* Style cho nút active trong bộ lọc user */
+        .filter-btn.active {
+            background-color: #f0fdf4; /* bg-green-50 */
+            color: #16a34a; /* text-green-600 */
+            border-color: #bbf7d0; /* border-green-200 */
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-white border-r border-gray-200 w-64 flex-shrink-0 hidden md:flex flex-col transition-all duration-300 z-30 h-full fixed md:relative shadow-sm">
+            <!-- Logo -->
+            <div class="h-20 flex items-center justify-center border-b border-gray-100 bg-green-500">
+                <a href="#" class="flex items-center cursor-pointer text-white">
+                    <i class="fa-solid fa-user-tie text-2xl mr-2"></i>
+                    <a href="index.html" class="font-bold text-xl tracking-wider">FitManager</a>
+                </a>
+            </div>
+
+            <!-- Menu -->
+            <div class="flex-grow overflow-y-auto no-scrollbar py-6">
+                <nav class="px-4 space-y-2">
+                    <!-- Mục Thông báo -->
+                    <button onclick="switchTab('notifications', this)" class="sidebar-link w-full flex items-center px-4 py-3 bg-green-100 text-green-700 rounded-lg transition font-bold shadow-sm">
+                        <i class="fa-solid fa-bell w-6"></i>
+                        <span>Thông báo</span>
+                    </button>
+
+                    <!-- Quản lý người dùng -->
+                    <button onclick="switchTab('users', this)" class="sidebar-link w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 rounded-lg transition font-medium">
+                        <i class="fa-solid fa-users w-6"></i>
+                        <span>Quản lý Người dùng</span>
+                    </button>
+
+                    <!-- Quản lý Video -->
+                    <a href="nguoi_dung.html" class="sidebar-link w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 rounded-lg transition font-medium">
+                        <i class="fa-solid fa-video w-6"></i>
+                        <span class="ml-3">Quản lý Video</span>
+                    </a>
+
+                    <button onclick="switchTab('feedback', this)" class="sidebar-link w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 rounded-lg transition font-medium">
+                        <i class="fa-solid fa-comments w-6"></i>
+                        <span>Phản hồi & Góp ý</span>
+                    </button>
+
+                    <div class="border-t border-gray-100 my-4"></div>
+                    
+                    <button onclick="switchTab('profile', this)" class="sidebar-link w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-green-600 rounded-lg transition font-medium">
+                        <i class="fa-solid fa-gear w-6"></i>
+                        <span>Cài đặt cá nhân</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- User Footer -->
+            <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">M</div>
+                    <div class="overflow-hidden">
+                        <p class="text-sm font-bold text-gray-800 truncate">Trần Thị B</p>
+                        <p class="text-xs text-gray-500">Quản lý nội dung</p>
+                    </div>
+                    <a href="dn.html" class="ml-auto text-gray-400 hover:text-red-500 transition" title="Đăng xuất">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sidebar Overlay (Mobile) -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-20 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+            
+            <!-- Header -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+                <div class="flex items-center">
+                    <button class="md:hidden text-gray-600 mr-4 focus:outline-none" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <h2 id="page-title" class="text-xl font-bold text-gray-800">Quản lý Thông báo</h2>
+                </div>
+            </header>
+
+            <!-- Scrollable Main Area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+                
+                <!-- 1. SECTION: NOTIFICATIONS -->
+                <div id="notifications" class="tab-content active">
+                    <!-- Action Bar -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Trung tâm thông báo</h3>
+                            <p class="text-sm text-gray-500">Quản lý tin tức hệ thống và tin nhắn riêng tư.</p>
+                        </div>
+                        <!-- Đã xóa nút tạo thông báo chung ở đây -->
+                    </div>
+
+                    <!-- System Notifications List -->
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-3 border-l-4 border-blue-500 pl-3">
+                            <h4 class="text-base font-bold text-gray-700">Thông báo hệ thống (Broadcast)</h4>
+                            <button onclick="openNotificationModal('system')" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition flex items-center">
+                                <i class="fa-solid fa-bullhorn mr-2"></i> Tạo Broadcast
+                            </button>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm" id="system-notif-table">
+                                    <thead class="bg-gray-50 text-gray-500 uppercase font-bold text-xs">
+                                        <tr>
+                                            <th class="px-6 py-3">Tiêu đề</th>
+                                            <th class="px-6 py-3">Nội dung tóm tắt</th>
+                                            <th class="px-6 py-3">Đối tượng</th>
+                                            <th class="px-6 py-3">Ngày gửi</th>
+                                            <th class="px-6 py-3 text-right">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr class="hover:bg-gray-50 group">
+                                            <td class="px-6 py-4 font-bold text-gray-800">Bảo trì hệ thống</td>
+                                            <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Hệ thống sẽ bảo trì vào lúc 00:00 ngày 25/10...</td>
+                                            <td class="px-6 py-4"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-bold">Toàn bộ</span></td>
+                                            <td class="px-6 py-4 text-gray-500">24/10/2023</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 group">
+                                            <td class="px-6 py-4 font-bold text-gray-800">Khuyến mãi gói VIP</td>
+                                            <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Giảm giá 20% cho gói tập VIP tháng 11...</td>
+                                            <td class="px-6 py-4"><span class="bg-purple-100 text-purple-600 px-2 py-1 rounded-full text-xs font-bold">Người dùng thường</span></td>
+                                            <td class="px-6 py-4 text-gray-500">20/10/2023</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Specific Notifications List -->
+                    <div>
+                        <div class="flex justify-between items-center mb-3 border-l-4 border-orange-500 pl-3">
+                            <h4 class="text-base font-bold text-gray-700">Lịch sử thông báo người dùng (Cá nhân)</h4>
+                            <button onclick="openNotificationModal('user')" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition flex items-center">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> Gửi tin nhắn riêng
+                            </button>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm" id="user-notif-table">
+                                    <thead class="bg-gray-50 text-gray-500 uppercase font-bold text-xs">
+                                        <tr>
+                                            <th class="px-6 py-3">ID Người dùng</th>
+                                            <th class="px-6 py-3">Tiêu đề</th>
+                                            <th class="px-6 py-3">Nội dung</th>
+                                            <th class="px-6 py-3">Ngày gửi</th>
+                                            <th class="px-6 py-3 text-right">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr class="hover:bg-gray-50 group">
+                                            <td class="px-6 py-4 font-mono text-xs font-bold text-gray-600">#USR102</td>
+                                            <td class="px-6 py-4 font-bold text-gray-800">Cảnh báo tài khoản</td>
+                                            <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Phát hiện đăng nhập lạ từ thiết bị mới...</td>
+                                            <td class="px-6 py-4 text-gray-500">15/10/2023</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 group">
+                                            <td class="px-6 py-4 font-mono text-xs font-bold text-gray-600">#USR999</td>
+                                            <td class="px-6 py-4 font-bold text-gray-800">Nhắc nhở gia hạn</td>
+                                            <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Gói tập của bạn sẽ hết hạn trong 3 ngày tới...</td>
+                                            <td class="px-6 py-4 text-gray-500">22/10/2023</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. SECTION: USER MANAGEMENT -->
+                <div id="users" class="tab-content">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <!-- Filters Header -->
+                        <div class="p-6 border-b border-gray-100 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                                <!-- Filter Buttons -->
+                                <div class="flex space-x-2">
+                                    <button onclick="filterAccounts('all', this)" class="filter-btn active px-4 py-2 bg-green-50 text-green-600 rounded-lg text-sm font-bold border border-green-200 transition">Tất cả</button>
+                                    <button onclick="filterAccounts('user', this)" class="filter-btn px-4 py-2 bg-white text-gray-500 hover:bg-gray-50 rounded-lg text-sm font-medium border border-gray-200 transition">Người dùng</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-2 w-full lg:w-auto">
+                                <!-- Search ID -->
+                                <div class="relative w-full lg:w-48">
+                                    <input type="text" id="search-id" onkeyup="searchById()" placeholder="Tìm kiếm ID..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500">
+                                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+                                </div>
+                                <!-- Add New Button -->
+                                <button onclick="addNewAccount()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center transition shadow-lg shadow-green-200 whitespace-nowrap">
+                                    <i class="fa-solid fa-plus mr-2"></i> Thêm mới
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse" id="accounts-table">
+                                <thead class="bg-gray-50 text-gray-500 text-xs uppercase font-bold tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">ID</th>
+                                        <th class="px-6 py-4">Tên tài khoản</th>
+                                        <th class="px-6 py-4">Vai trò</th>
+                                        <th class="px-6 py-4">Mật khẩu</th>
+                                        <th class="px-6 py-4 text-right">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-sm" id="table-body">
+                                    <!-- Row 3: User -->
+                                    <tr class="account-row hover:bg-gray-50 transition" data-role="user">
+                                        <td class="px-6 py-4 font-mono text-xs text-gray-500 font-bold account-id">#USR102</td>
+                                        <td class="px-6 py-4">
+                                            <div>
+                                                <p class="font-bold text-gray-900">Nguyễn Văn C</p>
+                                                <p class="text-gray-400 text-xs">user.c@gmail.com</p>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4"><span class="bg-gray-100 text-gray-600 py-1 px-3 rounded-full text-xs font-bold">Người dùng</span></td>
+                                        <td class="px-6 py-4 text-gray-500 font-mono text-xs">
+                                             <div class="flex items-center gap-2">
+                                                <span class="password-display" data-password="user123">••••••••</span>
+                                                <button onclick="togglePassword(this)" class="text-gray-400 hover:text-green-500 focus:outline-none"><i class="fa-solid fa-eye"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button onclick="deleteAccount(this)" class="text-gray-400 hover:text-red-600 px-2" title="Xóa tài khoản"><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                     <!-- Row 4: User -->
+                                     <tr class="account-row hover:bg-gray-50 transition" data-role="user">
+                                        <td class="px-6 py-4 font-mono text-xs text-gray-500 font-bold account-id">#USR103</td>
+                                        <td class="px-6 py-4">
+                                            <div>
+                                                <p class="font-bold text-gray-900">Phạm Văn D</p>
+                                                <p class="text-gray-400 text-xs">user.d@gmail.com</p>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4"><span class="bg-gray-100 text-gray-600 py-1 px-3 rounded-full text-xs font-bold">Người dùng</span></td>
+                                        <td class="px-6 py-4 text-gray-500 font-mono text-xs">
+                                             <div class="flex items-center gap-2">
+                                                <span class="password-display" data-password="user456">••••••••</span>
+                                                <button onclick="togglePassword(this)" class="text-gray-400 hover:text-green-500 focus:outline-none"><i class="fa-solid fa-eye"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button onclick="deleteAccount(this)" class="text-gray-400 hover:text-red-600 px-2" title="Xóa tài khoản"><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SECTION: FEEDBACK MANAGEMENT -->
+                <div id="feedback" class="tab-content">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+                        <div class="p-6 border-b border-gray-100">
+                            <h3 class="font-bold text-gray-800">Danh sách góp ý từ người dùng</h3>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <!-- Feedback Item 1 -->
+                            <div class="p-6 hover:bg-gray-50 transition">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3 text-xs font-bold">U1</div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-900">User #1</p>
+                                            <p class="text-xs text-gray-500">Hôm nay, 09:00 AM</p>
+                                        </div>
+                                    </div>
+                                    <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded font-bold">Mới</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-gray-800 mb-1">Lỗi video không tải được</h4>
+                                <p class="text-sm text-gray-600 mb-3">Tôi không thể xem video bài tập ngực hôm nay, màn hình cứ xoay tròn mãi...</p>
+                                <div class="flex gap-2">
+                                    <button class="text-xs bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Phản hồi</button>
+                                    <button class="text-xs border border-gray-300 text-gray-600 px-3 py-1 rounded hover:bg-gray-50">Đánh dấu đã đọc</button>
+                                </div>
+                            </div>
+
+                            <!-- Feedback Item 2 -->
+                            <div class="p-6 hover:bg-gray-50 transition opacity-75">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3 text-xs font-bold">U2</div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-900">User #2</p>
+                                            <p class="text-xs text-gray-500">Hôm qua</p>
+                                        </div>
+                                    </div>
+                                    <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded font-bold">Đã xử lý</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-gray-800 mb-1">Đề xuất thêm bài Yoga</h4>
+                                <p class="text-sm text-gray-600">Mình rất thích các bài Yoga hiện tại, mong admin thêm nhiều bài về giãn cơ hơn.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. SECTION: SETTINGS -->
+                <div id="profile" class="tab-content">
+                    <div class="max-w-2xl bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                        <h3 class="text-lg font-bold text-gray-800 mb-6">Cài đặt tài khoản Quản lý</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Họ tên hiển thị</label>
+                                <input type="text" value="Trần Thị B" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm bg-gray-50" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email công việc</label>
+                                <input type="email" value="manager.b@fitlife.vn" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm bg-gray-50" readonly>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <button onclick="changePassword()" class="w-full py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 transition mb-2">Đổi mật khẩu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL CREATE NOTIFICATION -->
+    <div id="notification-modal" class="modal hidden-modal fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
+            <div class="bg-green-500 px-6 py-4 flex justify-between items-center">
+                <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-paper-plane mr-2"></i>Gửi Thông Báo Mới</h3>
+                <button onclick="toggleModal('notification-modal')" class="text-white hover:text-gray-200"><i class="fa-solid fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <form onsubmit="sendNotification(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Tiêu đề</label>
+                        <input type="text" id="notif-title" placeholder="Nhập tiêu đề thông báo..." class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Đối tượng nhận</label>
+                        <select id="notif-type" onchange="toggleUserIdInput(this)" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+                            <option value="all">Toàn bộ người dùng</option>
+                            <option value="vip">Người dùng VIP</option>
+                            <option value="normal">Người dùng thường</option>
+                            <option value="specific">Người dùng cụ thể (ID)</option>
+                        </select>
+                    </div>
+                    <!-- User ID Input (Hidden by default) -->
+                    <div id="user-id-input" class="hidden">
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nhập ID Người dùng</label>
+                        <input type="text" id="notif-uid" placeholder="Ví dụ: #USR123" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nội dung</label>
+                        <textarea id="notif-content" rows="4" placeholder="Nhập nội dung chi tiết..." class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none" required></textarea>
+                    </div>
+                    <div class="flex justify-end pt-2">
+                        <button type="button" onclick="toggleModal('notification-modal')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 transition text-sm mr-2">Hủy</button>
+                        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-600 transition shadow-md text-sm">Gửi ngay</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                sidebar.classList.add('flex', 'absolute', 'inset-y-0', 'left-0');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('flex', 'absolute', 'inset-y-0', 'left-0');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            const titles = {
+                'notifications': 'Quản lý Thông báo',
+                'users': 'Quản lý người dùng',
+                'feedback': 'Hộp thư góp ý',
+                'profile': 'Thông tin cá nhân'
+            };
+            if(titles[tabId]) document.getElementById('page-title').innerText = titles[tabId];
+
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('bg-green-100', 'text-green-700', 'shadow-sm', 'font-bold');
+                link.classList.add('text-gray-600', 'hover:bg-gray-100', 'hover:text-green-600', 'font-medium');
+            });
+            if(element) {
+                element.classList.remove('text-gray-600', 'hover:bg-gray-100', 'hover:text-green-600', 'font-medium');
+                element.classList.add('bg-green-100', 'text-green-700', 'shadow-sm', 'font-bold');
+            }
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('absolute')) toggleSidebar();
+        }
+
+        // Modal Logic
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal.classList.contains('hidden-modal')) {
+                modal.classList.remove('hidden-modal');
+                modal.classList.add('visible-modal');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                modal.classList.remove('visible-modal');
+                modal.classList.add('hidden-modal');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Handle opening modal with specific type pre-selected
+        function openNotificationModal(type) {
+            const selectType = document.getElementById('notif-type');
+            const inputIdDiv = document.getElementById('user-id-input');
+            
+            // Reset form
+            document.querySelector('#notification-modal form').reset();
+
+            if (type === 'system') {
+                selectType.value = 'all'; // Default system type
+                inputIdDiv.classList.add('hidden');
+            } else if (type === 'user') {
+                selectType.value = 'specific';
+                inputIdDiv.classList.remove('hidden');
+            }
+            
+            toggleModal('notification-modal');
+        }
+
+        // --- NOTIFICATION LOGIC ---
+        function deleteNotification(btn) {
+            if(confirm("Bạn có chắc chắn muốn xóa thông báo này?")) {
+                const row = btn.closest('tr');
+                row.remove();
+            }
+        }
+
+        function toggleUserIdInput(select) {
+            const inputDiv = document.getElementById('user-id-input');
+            if (select.value === 'specific') {
+                inputDiv.classList.remove('hidden');
+            } else {
+                inputDiv.classList.add('hidden');
+            }
+        }
+
+        function sendNotification(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('notif-title').value;
+            const content = document.getElementById('notif-content').value;
+            const type = document.getElementById('notif-type').value;
+            const today = new Date().toLocaleDateString('en-GB');
+
+            if (type === 'specific') {
+                // Add to User Table
+                const uid = document.getElementById('notif-uid').value || '#UNKNOWN';
+                const row = `
+                    <tr class="hover:bg-gray-50 group">
+                        <td class="px-6 py-4 font-mono text-xs font-bold text-gray-600">${uid}</td>
+                        <td class="px-6 py-4 font-bold text-gray-800">${title}</td>
+                        <td class="px-6 py-4 text-gray-600 max-w-xs truncate">${content}</td>
+                        <td class="px-6 py-4 text-gray-500">${today}</td>
+                        <td class="px-6 py-4 text-right">
+                            <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                document.querySelector('#user-notif-table tbody').insertAdjacentHTML('afterbegin', row);
+            } else {
+                // Add to System Table
+                let targetText = "Toàn bộ";
+                let badgeColor = "bg-blue-100 text-blue-600";
+                
+                if(type === 'vip') { targetText = "Người dùng VIP"; badgeColor = "bg-orange-100 text-orange-600"; }
+                if(type === 'normal') { targetText = "Người dùng thường"; badgeColor = "bg-purple-100 text-purple-600"; }
+
+                const row = `
+                    <tr class="hover:bg-gray-50 group">
+                        <td class="px-6 py-4 font-bold text-gray-800">${title}</td>
+                        <td class="px-6 py-4 text-gray-600 max-w-xs truncate">${content}</td>
+                        <td class="px-6 py-4"><span class="${badgeColor} px-2 py-1 rounded-full text-xs font-bold">${targetText}</span></td>
+                        <td class="px-6 py-4 text-gray-500">${today}</td>
+                        <td class="px-6 py-4 text-right">
+                            <button onclick="deleteNotification(this)" class="text-gray-400 hover:text-red-600 transition" title="Xóa thông báo">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                document.querySelector('#system-notif-table tbody').insertAdjacentHTML('afterbegin', row);
+            }
+
+            alert('Thông báo đã được gửi thành công!');
+            toggleModal('notification-modal');
+        }
+
+        // --- ACCOUNT MANAGEMENT LOGIC ---
+        function filterAccounts(role, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active', 'bg-green-50', 'text-green-600', 'border-green-200');
+                b.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+            });
+            btn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+            btn.classList.add('active', 'bg-green-50', 'text-green-600', 'border-green-200');
+
+            const rows = document.querySelectorAll('.account-row');
+            const searchVal = document.getElementById('search-id').value.toUpperCase();
+
+            rows.forEach(row => {
+                const rowRole = row.getAttribute('data-role');
+                const rowId = row.querySelector('.account-id').innerText.toUpperCase();
+                
+                const roleMatch = (role === 'all') || (rowRole === role);
+                const idMatch = rowId.includes(searchVal);
+
+                if (roleMatch && idMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function searchById() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            let currentRole = 'all';
+            if (activeBtn && activeBtn.innerText.includes('Người dùng')) currentRole = 'user';
+            
+            filterAccounts(currentRole, activeBtn || document.querySelector('.filter-btn'));
+        }
+
+        function togglePassword(btn) {
+            const container = btn.parentElement;
+            const displaySpan = container.querySelector('.password-display');
+            const icon = btn.querySelector('i');
+            const realPassword = displaySpan.getAttribute('data-password');
+
+            if (displaySpan.innerText.includes('•')) {
+                displaySpan.innerText = realPassword;
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                displaySpan.innerText = '••••••••';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function deleteAccount(btn) {
+            if(confirm("Bạn có chắc chắn muốn xóa tài khoản người dùng này không?")) {
+                const row = btn.closest('tr');
+                row.remove();
+            }
+        }
+
+        function addNewAccount() {
+            const id = prompt("Nhập ID tài khoản (Ví dụ: #USR999):");
+            if (!id) return;
+            const name = prompt("Nhập tên hiển thị:");
+            if (!name) return;
+            const email = prompt("Nhập email:");
+            if (!email) return;
+            const password = prompt("Nhập mật khẩu:", "123456"); 
+            if (!password) return;
+
+            const roleHtml = '<span class="bg-gray-100 text-gray-600 py-1 px-3 rounded-full text-xs font-bold">Người dùng</span>';
+            const roleKey = 'user';
+
+            const newRow = document.createElement('tr');
+            newRow.className = 'account-row hover:bg-gray-50 transition';
+            newRow.setAttribute('data-role', roleKey);
+            newRow.innerHTML = `
+                <td class="px-6 py-4 font-mono text-xs text-gray-500 font-bold account-id">${id}</td>
+                <td class="px-6 py-4">
+                    <div><p class="font-bold text-gray-900">${name}</p><p class="text-gray-400 text-xs">${email}</p></div>
+                </td>
+                <td class="px-6 py-4">${roleHtml}</td>
+                <td class="px-6 py-4 text-gray-500 font-mono text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="password-display" data-password="${password}">••••••••</span>
+                        <button onclick="togglePassword(this)" class="text-gray-400 hover:text-green-500 focus:outline-none"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <button onclick="deleteAccount(this)" class="text-gray-400 hover:text-red-600 px-2" title="Xóa tài khoản"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            `;
+            document.getElementById('table-body').insertBefore(newRow, document.getElementById('table-body').firstChild);
+            searchById();
+        }
+
+        function changePassword() {
+            const newPass = prompt("Nhập mật khẩu mới:");
+            if (newPass) {
+                alert("Đã gửi yêu cầu đổi mật khẩu thành công!");
+            }
+        }
+    </script>
+</body>
+</html>

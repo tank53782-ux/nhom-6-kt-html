@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - FitLife VN</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../code_css/admin.css">
+    
+    <script src="../code_js/admin.js" defer></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside id="thanh-menu-doc" class="thanh-menu-doc">
+            <div class="khung-logo-admin">
+                <a href="index.html" class="logo-admin">
+                    <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                    <span class="logo-text">Fit<span class="logo-text-green">Life</span>Admin</span>
+                </a>
+            </div>
+            <div class="noi-dung-menu">
+                <nav class="danh-sach-menu">
+                    <button onclick="chuyenTab('tong-quan', this)" class="menu-link active">
+                        <i class="fa-solid fa-chart-line menu-icon"></i>
+                        <span class="menu-text">Tổng quan</span>
+                    </button>
+                    <button class="menu-link">
+                        <i class="fa-solid fa-layer-group menu-icon"></i>
+                        <a href="quan_ly.html" class="menu-text">Trang quản lý</a>
+                    </button>
+                    <button class="menu-link">
+                        <i class="fa-solid fa-users-viewfinder menu-icon"></i>
+                        <a href="nguoi_dung.html" class="menu-text">Trang người dùng</a>
+                    </button>
+                    <button onclick="chuyenTab('tai-khoan', this)" class="menu-link">
+                        <i class="fa-solid fa-user-shield menu-icon"></i>
+                        <span class="menu-text">Tài khoản</span>
+                    </button>
+                    <div class="ngan-cach-menu"></div>
+                    <button onclick="chuyenTab('cai-dat', this)" class="menu-link">
+                        <i class="fa-solid fa-gear menu-icon"></i>
+                        <span class="menu-text">Cài đặt</span>
+                    </button>
+                </nav>
+            </div>
+            <div class="thong-tin-admin">
+                <div class="khung-thong-tin">
+                    <div class="avatar-admin">A</div>
+                    <div class="thong-tin-chu">
+                        <p class="ten-admin">Admin</p>
+                        <p class="vai-tro-admin">Quản trị viên</p>
+                    </div>
+                    <a href="dn.html" class="nut-dang-xuat" title="Đăng xuất">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        
+        <div class="khung-noi-dung-chinh">
+            <header class="khung-tieu-de">
+                <div class="khung-tieu-de-trai">
+                    <h2 id="tieu-de-trang" class="tieu-de-trang">Tổng quan</h2>
+                </div>
+            </header>
+
+            <main class="noi-dung-chinh">
+                
+                
+                <div id="tong-quan" class="noi-dung-tab active">
+                     
+                     <div class="khung-thong-ke">
+                        <div class="thong-ke-item">
+                            <div class="icon-thong-ke icon-thanh-vien">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div class="noi-dung-thong-ke">
+                                <p class="tieu-de-thong-ke">Tổng thành viên</p>
+                                <h3 class="so-thong-ke">1,254</h3>
+                                <p class="thay-doi-thong-ke tang">+12% tuần này</p>
+                            </div>
+                        </div>
+                        <div class="thong-ke-item">
+                            <div class="icon-thong-ke icon-tap-luyen">
+                                <i class="fa-solid fa-dumbbell"></i>
+                            </div>
+                            <div class="noi-dung-thong-ke">
+                                <p class="tieu-de-thong-ke">Đang tập luyện</p>
+                                <h3 class="so-thong-ke">850</h3>
+                                <p class="thay-doi-thong-ke tang">+5% tuần này</p>
+                            </div>
+                        </div>
+                        <div class="thong-ke-item">
+                            <div class="icon-thong-ke icon-doanh-thu">
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                            </div>
+                            <div class="noi-dung-thong-ke">
+                                <p class="tieu-de-thong-ke">Doanh thu</p>
+                                <h3 class="so-thong-ke">45M ₫</h3>
+                                <p class="thay-doi-thong-ke tang">+8% tháng này</p>
+                            </div>
+                        </div>
+                        <div class="thong-ke-item">
+                            <div class="icon-thong-ke icon-don-hang">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            <div class="noi-dung-thong-ke">
+                                <p class="tieu-de-thong-ke">Đơn hàng mới</p>
+                                <h3 class="so-thong-ke">24</h3>
+                                <p class="thay-doi-thong-ke">Chờ xử lý</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="khung-bieu-do">
+                        <div class="tieu-de-bieu-do">
+                            <h3 class="ten-bieu-do">Hoạt động truy cập tuần qua</h3>
+                            <select class="chon-ky">
+                                <option>7 ngày qua</option>
+                                <option>Tháng này</option>
+                            </select>
+                        </div>
+                        <div class="khung-cot-bieu-do">
+                            <div class="cot-bieu-do">
+                                <div class="cot h-32"></div>
+                                <span class="nhan-cot">T2</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-40"></div>
+                                <span class="nhan-cot">T3</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-56 active"></div>
+                                <span class="nhan-cot">T4</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-36"></div>
+                                <span class="nhan-cot">T5</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-48"></div>
+                                <span class="nhan-cot">T6</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-60 hom-nay"></div>
+                                <span class="nhan-cot">T7</span>
+                            </div>
+                            <div class="cot-bieu-do">
+                                <div class="cot h-44"></div>
+                                <span class="nhan-cot">CN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="tai-khoan" class="noi-dung-tab">
+                    <div class="khung-quan-ly-tai-khoan">
+                        <div class="khung-loc-tim-kiem">
+                            <div class="khung-nut-loc">
+                                <button onclick="locTaiKhoan('tat-ca', this)" class="nut-loc active">Tất cả</button>
+                                <button onclick="locTaiKhoan('admin', this)" class="nut-loc">Admin</button>
+                                <button onclick="locTaiKhoan('manager', this)" class="nut-loc">Quản lý</button>
+                                <button onclick="locTaiKhoan('user', this)" class="nut-loc">Người dùng</button>
+                            </div>
+                            <div class="khung-tim-kiem-them">
+                                <div class="khung-tim-kiem">
+                                    <input type="text" id="tim-kiem-id" onkeyup="timKiemTheoId()" placeholder="Tìm kiếm ID..." class="input-tim-kiem">
+                                    <i class="fa-solid fa-search icon-tim-kiem"></i>
+                                </div>
+                                <button onclick="themTaiKhoanMoi()" class="nut-them-moi">
+                                    <i class="fa-solid fa-plus"></i> Thêm mới
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="khung-bang-tai-khoan">
+                            <table class="bang-tai-khoan" id="bang-tai-khoan">
+                                <thead class="tieu-de-bang">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên tài khoản</th>
+                                        <th>Vai trò</th>
+                                        <th>Mật khẩu</th>
+                                        <th class="text-right">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="noi-dung-bang" id="noi-dung-bang">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="cai-dat" class="noi-dung-tab">
+                     <div class="khung-cai-dat">
+                        <h3 class="tieu-de-cai-dat">Cài đặt tài khoản Admin</h3>
+                        <div class="khung-form-cai-dat">
+                            <div>
+                                <label class="nhan-form">Email</label>
+                                <input type="email" value="admin@fitlife.vn" class="input-form" readonly>
+                            </div>
+                            <div class="khung-nut-doi-mk">
+                                <button onclick="hienThiFormDoiMatKhau()" class="nut-doi-mk">Đổi mật khẩu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    
+    <div id="modal-doi-mk" class="modal-doi-mk">
+        <div class="khung-modal-doi-mk">
+            <div class="tieu-de-modal">
+                <h3>Đổi mật khẩu Admin</h3>
+                <button onclick="dongModalDoiMk()" class="nut-dong-modal">&times;</button>
+            </div>
+            <div class="noi-dung-modal">
+                <form id="form-doi-mk">
+                    <div class="nhom-input">
+                        <label for="mat-khau-hien-tai">Mật khẩu hiện tại</label>
+                        <input type="password" id="mat-khau-hien-tai" placeholder="Nhập mật khẩu hiện tại" required>
+                    </div>
+                    <div class="nhom-input">
+                        <label for="mat-khau-moi">Mật khẩu mới</label>
+                        <input type="password" id="mat-khau-moi" placeholder="Nhập mật khẩu mới" required>
+                    </div>
+                    <div class="nhom-input">
+                        <label for="nhap-lai-mat-khau-moi">Nhập lại mật khẩu mới</label>
+                        <input type="password" id="nhap-lai-mat-khau-moi" placeholder="Nhập lại mật khẩu mới" required>
+                    </div>
+                    <button type="submit" class="nut-luu-mk">Lưu mật khẩu mới</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

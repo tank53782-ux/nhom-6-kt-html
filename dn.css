@@ -1,0 +1,386 @@
+
+@import url('https://cdn.tailwindcss.com');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9fafb;
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#thanh-dieu-huong {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 50;
+}
+
+.noi-dung-nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem; 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo i {
+    font-size: 1.875rem; 
+    color: #10b981;
+    margin-right: 0.5rem;
+}
+
+.logo span {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: #1f2937;
+}
+
+.logo span > span {
+    color: #10b981;
+}
+
+.cac-lien-ket {
+    display: none;
+    align-items: center;
+    gap: 2rem; 
+}
+
+.cac-lien-ket a {
+    color: #4b5563;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.cac-lien-ket a:hover {
+    color: #10b981;
+}
+
+.phien-dang-nhap {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    padding-left: 1rem;
+    border-left: 1px solid #e5e7eb;
+}
+
+.nut-dang-nhap {
+    background-color: #10b981;
+    color: white;
+    padding: 0.5rem 1.25rem; 
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.nut-dang-nhap:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+}
+
+
+.noi-dung-chinh {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem 3rem 1rem; 
+    position: relative;
+    background-color: #111827;
+}
+
+.anh-nen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.anh-nen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+}
+
+.lop-nen-mo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(17, 24, 39, 0.5), rgba(17, 24, 39, 0.9));
+}
+
+.khung-dang-nhap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 28rem; 
+    background-color: white;
+    border-radius: 1rem; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.tieu-de-form {
+    background-color: #4ade80;
+    padding: 1.5rem 2rem;
+    text-align: center;
+}
+
+.tieu-de-form h2 {
+    font-size: 1.5rem; 
+    font-weight: 700;
+    color: white;
+}
+
+.tieu-de-form p {
+    color: #bbf7d0;
+    font-size: 0.875rem; 
+}
+
+.noi-dung-form {
+    padding: 2rem;
+}
+
+#form-dang-nhap {
+    display: grid; 
+    gap: 1.25rem; 
+}
+
+.nhom-input label {
+    display: block;
+    color: #4b5563;
+    font-size: 0.875rem; 
+    font-weight: 700;
+    margin-bottom: 0.5rem; 
+}
+
+.nhom-input input {
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 0.875rem 1rem; 
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem; 
+    outline: none;
+    font-size: 1rem; 
+    transition: all 0.3s ease;
+}
+
+.nhom-input input:focus {
+    border-color: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2); 
+}
+
+.khung-quen-mk {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+#nut-quen-mk {
+    color: #4ade80;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#nut-quen-mk:hover {
+    color: #16a34a;
+    text-decoration: underline;
+}
+
+.nut-gui {
+    width: 100%; 
+    box-sizing: border-box; 
+    background-color: #4ade80;
+    color: white;
+    font-weight: 700;
+    padding: 0.875rem 0; 
+    border-radius: 0.5rem; 
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+}
+
+.nut-gui:hover {
+    background-color: #22c55e;
+}
+
+.khung-chuyen-trang {
+    margin-top: 1.5rem;
+    text-align: center;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1rem;
+}
+
+.khung-chuyen-trang p {
+    font-size: 0.875rem; 
+    color: #4b5563;
+}
+
+.khung-chuyen-trang a {
+    color: #16a34a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.khung-chuyen-trang a:hover {
+    text-decoration: underline;
+}
+
+
+.chan-trang {
+    background-color: #111827;
+    color: white;
+    padding: 2rem 0; 
+    border-top: 1px solid #374151;
+}
+
+.noi-dung-chan-trang {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.noi-dung-chan-trang p {
+    color: #6b7280;
+    font-size: 0.875rem; 
+}
+
+.thong-bao {
+    position: fixed;
+    top: 6rem; 
+    right: 1rem;
+    padding: 0.75rem 1.5rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transform: translateX(150%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.thong-bao.hien-thi {
+    transform: translateX(0);
+}
+
+.thong-bao.loi {
+    background-color: #ef4444;
+    color: white;
+}
+
+.thong-bao.thanh-cong {
+    background-color: #10b981;
+    color: white;
+}
+
+.thong-bao.thong-tin {
+    background-color: #3b82f6;
+    color: white;
+}
+
+
+.form-quen-mk {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.khung-form-quen-mk {
+    background-color: white;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tieu-de-quen-mk {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tieu-de-quen-mk h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.nut-dong-form {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.3s;
+}
+
+.nut-dong-form:hover {
+    color: #1f2937;
+}
+
+.noi-dung-quen-mk p {
+    margin-bottom: 1.5rem;
+    color: #4b5563;
+    font-size: 0.875rem;
+}
+
+#form-dat-lai-mk {
+    display: grid;
+    gap: 1.25rem;
+}
+
+#form-dat-lai-mk .nhom-input {
+    margin-bottom: 0;
+}
+
+#form-dat-lai-mk .nut-gui {
+    margin-top: 0.5rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (min-width: 768px) {
+    .cac-lien-ket {
+        display: flex;
+    }
+}
